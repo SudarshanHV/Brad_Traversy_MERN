@@ -1,4 +1,7 @@
 const express = require('express');
+const request = require('request');
+const config = require('config');
+const axios = require('axios');
 const router = express.Router();
 const Profile = require('../../models/Profile');
 const User = require('../../models/Users');
