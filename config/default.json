@@ -1,4 +1,5 @@
 {
     "mongoURI":"mongodb+srv://sud123:sud123@cluster0.v8ta1.mongodb.net/DF_Test?retryWrites=true&w=majority",
-    "jwtSecret": "mySecretToken"
+    "jwtSecret": "mySecretToken",
+    "githubToken": "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"
 }
