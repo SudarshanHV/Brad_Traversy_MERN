@@ -3,8 +3,11 @@ const request = require("request");
 const config = require("config");
 const axios = require("axios");
 const router = express.Router();
+
 const Profile = require("../../models/Profile");
 const User = require("../../models/Users");
+const Post = require("../../models/Posts");
+
 const auth = require("../../middleware/auth");
 const { check, validationResult } = require("express-validator");
 
@@ -43,8 +46,8 @@ router.post(
         auth,
         [
             check("status", "Status cannot be empty").not().isEmpty(),
-            check("skills", "Skills cannot be empty").not().isEmpty(),
-        ],
+            check("skills", "Skills cannot be empty").not().isEmpty()
+        ]
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -64,7 +67,7 @@ router.post(
             facebook,
             twitter,
             instagram,
-            linkedin,
+            linkedin
         } = req.body;
 
         //Create a profile Object.
@@ -125,7 +128,7 @@ router.get("/", async (req, res) => {
     try {
         const profiles = await Profile.find().populate("user", [
             "name",
-            "avatar",
+            "avatar"
         ]);
         res.json(profiles);
     } catch (err) {
@@ -141,7 +144,7 @@ router.get("/", async (req, res) => {
 router.get("/user/:user_id", async (req, res) => {
     try {
         const profile = await Profile.findOne({
-            user: req.params.user_id,
+            user: req.params.user_id
         }).populate("user", ["name", "avatar"]);
         if (!profile) return res.status(404).json({ msg: "Profile not found" });
         res.json(profile);
@@ -160,6 +163,8 @@ router.get("/user/:user_id", async (req, res) => {
 
 router.delete("/", auth, async (req, res) => {
     try {
+        //Remove user posts
+        await Post.deleteMany({ user: req.user.id });
         //Remove Profile
         await Profile.findOneAndRemove({ user: req.user.id });
         //Remove User
@@ -183,8 +188,8 @@ router.put(
         [
             check("title", "Title is required").not().isEmpty(),
             check("company", "Company is required").not().isEmpty(),
-            check("from", "From is required").not().isEmpty(),
-        ],
+            check("from", "From is required").not().isEmpty()
+        ]
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -202,7 +207,7 @@ router.put(
             from,
             to,
             current,
-            description,
+            description
         };
 
         try {
@@ -256,8 +261,8 @@ router.put(
             check("school", "School is required").not().isEmpty(),
             check("degree", "Degree is required").not().isEmpty(),
             check("fieldofstudy", "Field of Study is required").not().isEmpty(),
-            check("from", "From is required").not().isEmpty(),
-        ],
+            check("from", "From is required").not().isEmpty()
+        ]
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -275,7 +280,7 @@ router.put(
             from,
             to,
             current,
-            description,
+            description
         };
 
         try {
@@ -327,7 +332,7 @@ router.get("/github/:username", async (req, res) => {
         );
         const headers = {
             "user-agent": "node.js",
-            Authorization: `token ${config.get("githubToken")}`,
+            Authorization: `token ${config.get("githubToken")}`
         };
 
         const gitHubResponse = await axios.get(uri, { headers });
