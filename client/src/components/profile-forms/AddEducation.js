@@ -112,9 +112,9 @@ const AddEducation = ({ addEducation, history }) => {
                     ></textarea>
                 </div>
                 <input type="submit" class="btn btn-primary my-1" />
-                <a class="btn btn-light my-1" href="dashboard.html">
+                <Link class="btn btn-light my-1" to="/dashboard">
                     Go Back
-                </a>
+                </Link>
             </form>
         </Fragment>
     );
@@ -124,4 +124,4 @@ addEducation.propTypes = {
     addEducation: PropTypes.func.isRequired
 };
 
-export default connect(null, { addEducation })(AddEducation);
+export default connect(null, { addEducation })(withRouter(AddEducation));

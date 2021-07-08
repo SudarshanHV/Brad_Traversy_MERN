@@ -8,7 +8,7 @@ const EditProfile = ({
     profile: { profile, loading },
     createProfile,
     getCurrentProfile,
-    history,
+    history
 }) => {
     const [formData, setFormData] = useState({
         company: "",
@@ -22,7 +22,7 @@ const EditProfile = ({
         facebook: "",
         linkedin: "",
         youtube: "",
-        instagram: "",
+        instagram: ""
     });
 
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
@@ -46,9 +46,9 @@ const EditProfile = ({
             linkedin: loading || !profile.social ? "" : profile.social.linkedin,
             youtube: loading || !profile.social ? "" : profile.social.youtube,
             instagram:
-                loading || !profile.social ? "" : profile.social.instagram,
+                loading || !profile.social ? "" : profile.social.instagram
         });
-    }, [loading]);
+    }, [loading, getCurrentProfile]);
 
     const {
         company,
@@ -62,7 +62,7 @@ const EditProfile = ({
         facebook,
         linkedin,
         youtube,
-        instagram,
+        instagram
     } = formData;
 
     const onChange = (e) =>
@@ -266,11 +266,11 @@ const EditProfile = ({
 EditProfile.propTypes = {
     createProfile: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
-    getCurrentProfile: PropTypes.func.isRequired,
+    getCurrentProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    profile: state.profile,
+    profile: state.profile
 });
 
 export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
