@@ -24,7 +24,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 profile: payload,
-                laoding: false
+                loading: false
             };
         case GET_PROFILES:
             return {
