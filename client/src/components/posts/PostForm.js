@@ -13,7 +13,7 @@ const PostForm = ({ addPost }) => {
             <form
                 className="form my-1"
                 onSubmit={(e) => {
-                    e.preventDedault();
+                    e.preventDefault();
                     addPost({ text });
                     setText("");
                 }}
